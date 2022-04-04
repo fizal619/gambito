@@ -29,5 +29,6 @@ jobs:
         run: |
           git config --global user.name 'The Octocat'
           git config --global user.email 'octocat@github.com'
-          git commit -am "Updated Results And Predictions"
+          git add .
+          git commit -m "Updated Results And Predictions"
           git push
