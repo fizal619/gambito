@@ -1,0 +1,33 @@
+name: Predict GY Lottery Numbers
+
+on:
+  schedule:
+    - cron: "0 12 * * TUE,FRI"
+  workflow_dispatch:
+
+
+jobs:
+  prediction:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Install packages
+        run: npm i
+
+      - name: Check for updates to results
+        run: node scrapeArchive.js update
+
+      - name: Generate a prediction
+        run: node generatePrediction.js
+
+      - name: Commit result back to repo
+        run: |
+          git config --global user.name 'Github Action'
+          git config --global user.email 'gha@users.noreply.github.com'
+          git commit -am "Automated report"
+          git push
