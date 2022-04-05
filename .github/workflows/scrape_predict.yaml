@@ -2,7 +2,7 @@ name: Predict GY Lottery Numbers
 
 on:
   schedule:
-    - cron: "0 12 * * MON,TUE,FRI"
+    - cron: "0 12 * * TUE,FRI"
   workflow_dispatch:
 
 
@@ -26,6 +26,7 @@ jobs:
         run: node generatePrediction.js
 
       - name: Commit result back to repo
+        continue-on-error: true
         run: |
           git config --global user.name 'The Octocat'
           git config --global user.email 'octocat@github.com'

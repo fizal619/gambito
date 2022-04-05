@@ -114,3 +114,11 @@ fs.writeFileSync(`./predictions/${filename}.json`, JSON.stringify({
   mostPerSlot: recurringPerSlot,
   mostOccuring: mostOccuringTotal
 }));
+
+// generate new index
+fs.rmSync("./predictions/index.json");
+const predictionList = fs.readdirSync("./predictions");
+fs.writeFileSync(
+  "./predictions/index.json",
+  JSON.stringify(predictionList)
+);
