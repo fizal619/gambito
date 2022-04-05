@@ -1,5 +1,6 @@
 const prediction1El = document.querySelector("#prediction1");
 const prediction2El = document.querySelector("#prediction2");
+const nextDateEl = document.querySelector("#nextDate");
 const pastPredictionsEl = document.querySelector("#past-predictions");
 
 async function get(url) {
@@ -26,6 +27,8 @@ async function main() {
 
   for (filename in predictions) {
     const predictionDate = getDateFromFilename(filename);
+    nextDateEl.textContent = predictionDate.toDateString();
+
     if (new Date() < predictionDate) {
       const prediction1 = predictions[filename].mostPerSlot;
       const results = prediction1.slice(0,6);
