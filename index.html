@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>🎲Gambito</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="frontend/main.css">
+  </head>
+  <body class="has-text-centered">
+  <section class="section is-medium">
+    <div class="container">
+      <h1 class="title">
+        🎲Gambito
+      </h1>
+      <p class="subtitle">
+        Using statistics to eliminate numbers not frequently drawn in small lotteries.
+      </p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <h2 class="title">
+        Next Prediction
+      </h2>
+    </div>
+    <div class="container">
+      <div class="content tile is-ancestor">
+        <div class="tile is-parent">
+          <article class="tile is-child box">
+            <p class="title is-size-4">Prediction 1</p>
+            <p class="subtitle" id="prediction1">
+              2 3 4 5 6 7 <b>12</b> F
+            </p>
+          </article>
+        </div>
+        <div class="tile is-parent">
+          <article class="tile is-child box">
+            <p class="title is-size-4">Prediction 2</p>
+            <p class="subtitle" id="prediction2">
+              2 3 4 5 6 7 <b>12</b> F
+            </p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h3 class="title is-size-3">Past Predictions</h3>
+    <br>
+    <div class="columns" id="past-predictions">
+      <!-- <div class="column is-one-third">
+        <div class="box">
+          Test
+        </div>
+      </div> -->
+    </div>
+  </section>
+
+  <script src="frontend/main.js"></script>
+  </body>
+</html>

@@ -4,11 +4,13 @@
   "description": "",
   "main": "scrapeArchive.js",
   "scripts": {
+    "start": "simplehttpserver .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "puppeteer": "^13.5.2"
+    "puppeteer": "^13.5.2",
+    "simplehttpserver": "^0.3.0"
   }
 }
