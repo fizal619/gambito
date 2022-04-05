@@ -118,7 +118,12 @@ fs.writeFileSync(`./predictions/${filename}.json`, JSON.stringify({
 // generate new index
 fs.rmSync("./predictions/index.json");
 const predictionList = fs.readdirSync("./predictions");
+let predictionIndex = {};
+predictionList.forEach(item => {
+  const temp = fs.readFileSync("./predictions/" + item);
+  predictionIndex[item] = JSON.parse(temp);
+});
 fs.writeFileSync(
   "./predictions/index.json",
-  JSON.stringify(predictionList)
+  JSON.stringify(predictionIndex)
 );
