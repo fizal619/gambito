@@ -9,15 +9,15 @@
     <link rel="icon" type="image/png" sizes="16x16" href="frontend/favicon/favicon-16x16.png">
     <link rel="manifest" href="frontend/favicon/site.webmanifest">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <link rel="stylesheet" href="frontend/main.css">
+    <link rel="stylesheet" href="frontend/main.css?v=1">
   </head>
   <body class="has-text-centered">
-  <section class="section is-medium">
+  <section class="section is-medium has-background-danger-dark">
     <div class="container">
-      <h1 class="title">
+      <h1 class="title has-text-white">
         🎲Gambito
       </h1>
-      <p class="subtitle">
+      <p class="subtitle has-text-white">
         Using statistics to eliminate numbers not frequently drawn in small lotteries.
       </p>
     </div>
@@ -53,15 +53,11 @@
   <section class="section">
     <h3 class="title is-size-3">Past Predictions</h3>
     <br>
-    <div class="columns" id="past-predictions">
-      <!-- <div class="column is-one-third">
-        <div class="box">
-          Test
-        </div>
-      </div> -->
+    <div class="columns is-multiline is-centered" id="past-predictions">
+      <!-- predictions will be added here -->
     </div>
   </section>
 
-  <script src="frontend/main.js"></script>
+  <script src="frontend/main.js?v=1"></script>
   </body>
 </html>
