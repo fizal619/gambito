@@ -36,7 +36,7 @@ const tallyArray = arr => {
   return tally;
 }
 
-const mostOccuringInIndex = (arr, index) => {
+const mostOccuringInIndex = (arr, index, destArr) => {
   const tally = {};
   arr.forEach(row => {
     if (tally[row[index]]) {
@@ -48,7 +48,7 @@ const mostOccuringInIndex = (arr, index) => {
   let largestVal = 0;
   let largestKey;
   for (key in tally) {
-    if (largestVal < tally[key]) {
+    if (largestVal < tally[key] && !destArr.includes(key)) {
       largestVal = tally[key];
       largestKey = key;
     }
@@ -64,16 +64,15 @@ const splitResults = results.map( result => {
   ];
 });
 
-const recurringPerSlot = [
-  mostOccuringInIndex(splitResults, 0),
-  mostOccuringInIndex(splitResults, 1),
-  mostOccuringInIndex(splitResults, 2),
-  mostOccuringInIndex(splitResults, 3),
-  mostOccuringInIndex(splitResults, 4),
-  mostOccuringInIndex(splitResults, 5),
-  mostOccuringInIndex(splitResults, 6),
-  mostOccuringInIndex(splitResults, 7),
-];
+const recurringPerSlot = [];
+recurringPerSlot.push(mostOccuringInIndex(splitResults, 0, recurringPerSlot));
+recurringPerSlot.push(mostOccuringInIndex(splitResults, 1, recurringPerSlot));
+recurringPerSlot.push(mostOccuringInIndex(splitResults, 2, recurringPerSlot));
+recurringPerSlot.push(mostOccuringInIndex(splitResults, 3, recurringPerSlot));
+recurringPerSlot.push(mostOccuringInIndex(splitResults, 4, recurringPerSlot));
+recurringPerSlot.push(mostOccuringInIndex(splitResults, 5, recurringPerSlot));
+recurringPerSlot.push(mostOccuringInIndex(splitResults, 6, recurringPerSlot));
+recurringPerSlot.push(mostOccuringInIndex(splitResults, 7, recurringPerSlot));
 
 console.log("Most recurring per slot: ", recurringPerSlot);
 

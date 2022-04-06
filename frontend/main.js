@@ -31,6 +31,7 @@ function checkMatches(arr1, arr2) {
 
 async function main() {
   const rawData = await get("rawData/supasix.json");
+  const latestResultDate = new Date(rawData[0][0]);
   // console.log(rawData);
   const predictions = await get("predictions/index.json");
   // console.log(predictions);
@@ -46,7 +47,7 @@ async function main() {
     const prediction2 = predictions[filename].mostOccuring;
     const results2 = prediction2.slice(0,6);
 
-    if (new Date() < predictionDate) {
+    if ( predictionDate > latestResultDate ) {
       prediction1El.innerHTML = `
         ${results.join(" ")} <b>${prediction1[6]}</b> ${prediction1[7]}
       `;
@@ -63,7 +64,9 @@ async function main() {
         }
       });
       // console.log(lottoResult);
-      lottoResults[predictionDate.toDateString()] = lottoResult;
+      if (lottoResult) {
+        lottoResults[predictionDate.toDateString()] = lottoResult;
+      }
     }
   }
   console.log(lottoResults);
