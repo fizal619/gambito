@@ -82,7 +82,7 @@ async function main() {
     console.log(prediction);
     const content = `
       <div class="column is-one-third-tablet is-one-quarter-desktop">
-        <div class="box has-text-left">
+        <div class="box has-text-left past-prediction">
           <p><b>Date:</b> ${key}</p>
           <p>
             <b>Results:</b>

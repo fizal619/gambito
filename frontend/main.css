@@ -1,3 +1,7 @@
 h2.title, h1.title {
   padding-bottom: 25px;
 }
+
+.past-prediction p {
+  padding: 4px;
+}
