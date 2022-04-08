@@ -2,7 +2,8 @@ name: Predict GY Lottery Numbers
 
 on:
   schedule:
-    - cron: "0 12 * * TUE,FRI"
+    # 8am EST
+    - cron: "0 12 * * *"
   workflow_dispatch:
 
 
