@@ -40,14 +40,13 @@ async function main() {
 
   for (filename in predictions) {
     const predictionDate = getDateFromFilename(filename);
-    nextDateEl.textContent = predictionDate.toDateString();
-
     const prediction1 = predictions[filename].mostPerSlot;
     const results = prediction1.slice(0,6);
     const prediction2 = predictions[filename].mostOccuring;
     const results2 = prediction2.slice(0,6);
 
     if ( predictionDate > latestResultDate ) {
+      nextDateEl.textContent = predictionDate.toDateString();
       prediction1El.innerHTML = `
         ${results.join(" ")} <b>${prediction1[6]}</b> ${prediction1[7]}
       `;
