@@ -33,12 +33,17 @@ function getDateFromFilename(filename) {
 
 function checkMatches(arr1, arr2) {
   let matches = 0;
+  let matchedNumbers = [];
   arr1.forEach( item => {
     if (arr2.includes(item)) {
+      matchedNumbers.push(item);
       matches++;
     }
   });
-  return matches;
+  return {
+    matches,
+    matchedNumbers
+  };
 }
 
 async function main() {
@@ -155,11 +160,20 @@ async function main() {
     return new Date(b) - new Date(a);
   });
   // console.log(orderedKeys);
+  const allMatchedNumbers = [];
   orderedKeys.forEach(key => {
     let filename = new Date(key).toLocaleDateString()+".json";
     filename = filename.split("/").join("-");
     const prediction = predictions[filename];
     console.log(prediction);
+    const match1 = checkMatches(
+      prediction.mostPerSlot.slice(0,6), lottoResults[key][1].split(" ").concat([lottoResults[key][2]])
+    );
+    const match2 = checkMatches(
+      prediction.mostOccuring.slice(0,6), lottoResults[key][1].split(" ").concat([lottoResults[key][2]])
+    );
+    allMatchedNumbers = allMatchedNumbers.concat(match1.matchedNumbers).concat(match2.matchedNumbers);
+
     const content = `
       <div class="column is-one-third-tablet is-one-quarter-desktop">
         <div class="box has-text-left past-prediction">
@@ -175,9 +189,7 @@ async function main() {
             ${prediction.mostPerSlot.slice(0,6).join(" ")}
             <b>${prediction.mostPerSlot[6]}</b>
             ${prediction.mostPerSlot[7]}
-            (${checkMatches(
-              prediction.mostPerSlot.slice(0,6), lottoResults[key][1].split(" ").concat([lottoResults[key][2]])
-              )} matched${prediction.mostPerSlot[7] == lottoResults[key][3] ? ", Free Ticket" : ""}
+            (${match1.matches} matched${prediction.mostPerSlot[7] == lottoResults[key][3] ? ", Free Ticket" : ""}
             )
           </p>
           <p>
@@ -185,9 +197,7 @@ async function main() {
             ${prediction.mostOccuring.slice(0,6).join(" ")}
             <b>${prediction.mostOccuring[6]}</b>
             ${prediction.mostOccuring[7]}
-            (${checkMatches(
-              prediction.mostOccuring.slice(0,6), lottoResults[key][1].split(" ").concat([lottoResults[key][2]])
-              )} matched${prediction.mostOccuring[7] == lottoResults[key][3] ? ", Free Ticket" : ""}
+            (${match2.matches} matched${prediction.mostOccuring[7] == lottoResults[key][3] ? ", Free Ticket" : ""}
             )
           </p>
         </div>
@@ -196,6 +206,7 @@ async function main() {
     // console.log(content);
     pastPredictionsEl.innerHTML += content;
   });
+  console.log(allMatchedNumbers);
 }
 
 main();
