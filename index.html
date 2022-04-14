@@ -26,7 +26,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
     />
-    <link rel="stylesheet" href="frontend/main.css?v=2" />
+    <link rel="stylesheet" href="frontend/main.css?v=3" />
   </head>
   <body class="has-text-centered">
     <section class="section is-medium has-background-danger-dark">
@@ -91,13 +91,16 @@
     <div class="page graphs">
       <div class="section">
         <div class="container">
-          <canvas id="number-frequency"></canvas>
+          <canvas id="match-frequency"></canvas>
+          <p><b>Chart 1:</b> Frequency of predicted numbers that have matched results</p>
         </div>
       </div>
-      <div class="section">
-        <div class="container">
-          <canvas id="match-frequency"></canvas>
-        </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+        <canvas id="number-frequency"></canvas>
+        <p><b>Chart 2:</b> Frequency of all numbers across all results</p>
       </div>
     </div>
 
@@ -112,7 +115,7 @@
       </div>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="frontend/main.js?v=7"></script>
-    <script src="frontend/menu.js?v=1"></script>
+    <script src="frontend/main.js?v=9"></script>
+    <script src="frontend/menu.js?v=2"></script>
   </body>
 </html>

@@ -5,3 +5,7 @@ h2.title, h1.title {
 .past-prediction p {
   padding: 4px;
 }
+
+.graphs {
+  display: none;
+}

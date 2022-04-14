@@ -66,8 +66,8 @@ async function main() {
   const labels = Object.keys(tally);
   const data = Object.values(tally);
 
-  data.reverse();
-  labels.sort((a, b) => tally[b] - tally[a]);
+  data.sort();
+  labels.sort((a, b) => tally[a] - tally[b]);
 
   const chartData = {
     labels: labels,
@@ -160,7 +160,7 @@ async function main() {
     return new Date(b) - new Date(a);
   });
   // console.log(orderedKeys);
-  const allMatchedNumbers = [];
+  let allMatchedNumbers = [];
   orderedKeys.forEach(key => {
     let filename = new Date(key).toLocaleDateString()+".json";
     filename = filename.split("/").join("-");
@@ -206,7 +206,65 @@ async function main() {
     // console.log(content);
     pastPredictionsEl.innerHTML += content;
   });
-  console.log(allMatchedNumbers);
+
+  // start charting matched numbers
+  const matchedTally = tallyArray(allMatchedNumbers);
+  const matchedLabels = Object.keys(matchedTally);
+  const matchedData = Object.values(matchedTally);
+  console.log('matchedTally :>> ', matchedTally);
+  console.log('matchedLabels :>> ', matchedLabels);
+  console.log('matchedData :>> ', matchedData);
+  matchedData.sort();
+  matchedLabels.sort((a, b) => matchedTally[a] - matchedTally[b]);
+  console.log('after sort matchedLabels :>> ', matchedLabels);
+  console.log('after sort matchedData :>> ', matchedData);
+  const matchedChartData = {
+    labels: matchedLabels,
+    datasets: [{
+      label: 'Match Frequency',
+      data: matchedData,
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 205, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(201, 203, 207, 0.2)'
+      ],
+      borderColor: [
+        'rgb(255, 99, 132)',
+        'rgb(255, 159, 64)',
+        'rgb(255, 205, 86)',
+        'rgb(75, 192, 192)',
+        'rgb(54, 162, 235)',
+        'rgb(153, 102, 255)',
+        'rgb(201, 203, 207)'
+      ],
+      borderWidth: 1
+    }]
+  };
+  const matchedConfig = {
+    type: 'bar',
+    data: matchedChartData,
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    },
+  };
+  const matchedChart = new Chart(
+    document.getElementById('match-frequency'),
+    matchedConfig
+  );
+  // end charting matched numbers
 }
 
 main();
