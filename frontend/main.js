@@ -105,7 +105,19 @@ async function main() {
         }
       },
       scales: {
+        x: {
+          title: {
+            text: "Lottery Number",
+            display: true,
+            align: "end"
+          }
+        },
         y: {
+          title: {
+            text: "Frequency",
+            display: true,
+            align: "end"
+          },
           beginAtZero: true
         }
       }
@@ -254,7 +266,19 @@ async function main() {
         }
       },
       scales: {
+        x: {
+          title: {
+            text: "Lottery Number",
+            display: true,
+            align: "end"
+          }
+        },
         y: {
+          title: {
+            text: "Matches",
+            display: true,
+            align: "end"
+          },
           beginAtZero: true
         }
       }
