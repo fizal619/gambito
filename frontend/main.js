@@ -3,6 +3,18 @@ const prediction2El = document.querySelector("#prediction2");
 const nextDateEl = document.querySelector("#nextDate");
 const pastPredictionsEl = document.querySelector("#past-predictions");
 
+const tallyArray = arr => {
+  const tally = {};
+  arr.forEach(item => {
+    if (tally[item]) {
+      tally[item]++;
+    } else {
+      tally[item] = 1;
+    }
+  });
+  return tally;
+}
+
 async function get(url) {
   try {
     const res = await fetch(url);
@@ -31,6 +43,75 @@ function checkMatches(arr1, arr2) {
 
 async function main() {
   const rawData = await get("rawData/supasix.json");
+
+  // chart all balls
+  const splitResults = rawData.map( result => {
+    return [
+      ...result[1].split(" "),
+      result[2],
+      result[3]
+    ];
+  });
+  let allNumbers = [];
+  splitResults.forEach(result => {
+    allNumbers.push(...result.slice(0,7));
+  });
+  const tally = tallyArray(allNumbers);
+  delete tally["09"];
+  const labels = Object.keys(tally);
+  const data = Object.values(tally);
+
+  data.sort();
+  labels.sort((a, b) => tally[b] - tally[a]);
+
+  const chartData = {
+    labels: labels,
+    datasets: [{
+      label: 'Number Frequency',
+      data: data,
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 205, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(201, 203, 207, 0.2)'
+      ],
+      borderColor: [
+        'rgb(255, 99, 132)',
+        'rgb(255, 159, 64)',
+        'rgb(255, 205, 86)',
+        'rgb(75, 192, 192)',
+        'rgb(54, 162, 235)',
+        'rgb(153, 102, 255)',
+        'rgb(201, 203, 207)'
+      ],
+      borderWidth: 1
+    }]
+  };
+  const config = {
+    type: 'bar',
+    data: chartData,
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    },
+  };
+  const numberFrequency = new Chart(
+    document.getElementById('number-frequency'),
+    config
+  );
+  // end chart all balls
+
   const latestResultDate = new Date(rawData[0][0]);
   // console.log(rawData);
   const predictions = await get("predictions/index.json");
