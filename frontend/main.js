@@ -61,7 +61,7 @@ async function main() {
   const labels = Object.keys(tally);
   const data = Object.values(tally);
 
-  data.sort();
+  data.reverse();
   labels.sort((a, b) => tally[b] - tally[a]);
 
   const chartData = {
