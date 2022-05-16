@@ -200,7 +200,7 @@ async function main() {
             <b>Prediction 1:</b>
             ${prediction.mostPerSlot.slice(0,6).join(" ")}
             <b>${prediction.mostPerSlot[6]}</b>
-            ${prediction.mostPerSlot[7]}
+            ${prediction.mostPerSlot[7]} <br/>
             (${match1.matches} matched${prediction.mostPerSlot[7] == lottoResults[key][3] ? ", Free Ticket" : ""}
             )
           </p>
@@ -208,7 +208,7 @@ async function main() {
             <b>Prediction 2:</b>
             ${prediction.mostOccuring.slice(0,6).join(" ")}
             <b>${prediction.mostOccuring[6]}</b>
-            ${prediction.mostOccuring[7]}
+            ${prediction.mostOccuring[7]} <br/>
             (${match2.matches} matched${prediction.mostOccuring[7] == lottoResults[key][3] ? ", Free Ticket" : ""}
             )
           </p>
